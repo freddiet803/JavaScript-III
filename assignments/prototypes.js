@@ -116,12 +116,9 @@ function Hero(someHero) {
   this.occupation = someHero.occupation;
 }
 Hero.prototype = Object.create(Humanoid.prototype);
-Hero.prototype.attackVillian = function(villian) {
+Hero.prototype.attackVillain = function(villain) {
   villain.healthPoints = villain.healthPoints - 5;
-  if (villain.healthPoints <= 0) {
-    villian.destroy();
-  }
-  return `${this.name} attacked ${villian.name} and dealt 5 damage`;
+  return `${this.name} attacked ${villain.name} and dealt 5 damage`;
 };
 
 function Villain(someVillain) {
@@ -132,9 +129,6 @@ function Villain(someVillain) {
 Villain.prototype = Object.create(Humanoid.prototype);
 Villain.prototype.attackHero = function(hero) {
   hero.healthPoints = hero.healthPoints - 3;
-  if (hero.healthPoints <= 0) {
-    hero.destroy();
-  }
   return `${this.name} attacked ${hero.name} and dealt 3 damage`;
 };
 
@@ -190,9 +184,9 @@ const heroArcher = new Hero({
     height: 4
   },
   healthPoints: 10,
-  name: 'Lilith',
+  name: 'Freddie',
   team: 'Forest Kingdom',
-  weapons: ['Bow', 'Dagger'],
+  weapons: ['Bow', 'Bazooka'],
   language: 'Elvish',
   occupation: 'Hero'
 });
@@ -205,9 +199,9 @@ const evilArcher = new Villain({
     height: 4
   },
   healthPoints: 10,
-  name: 'Lilith',
+  name: 'Brittany',
   team: 'Forest Kingdom',
-  weapons: ['Bow', 'Dagger'],
+  weapons: ['Bow', 'car'],
   language: 'Elvish',
   occupation: 'Villain'
 });
@@ -225,3 +219,22 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 console.log('==================================');
 console.log('Entering Battle');
+console.log(`${heroArcher.name} and ${evilArcher.name} have entered battle...`);
+
+console.log(`${heroArcher.name} has ${heroArcher.healthPoints} health`);
+console.log(`${evilArcher.name} has ${evilArcher.healthPoints} health`);
+
+while (evilArcher.healthPoints > 0 && heroArcher.healthPoints > 0) {
+  console.log(heroArcher.attackVillain(evilArcher));
+  console.log(evilArcher.attackHero(heroArcher));
+  console.log(`${heroArcher.name} has ${heroArcher.healthPoints} health`);
+  console.log(`${evilArcher.name} has ${evilArcher.healthPoints} health`);
+  if (evilArcher.healthPoints == 0) {
+    console.log(`Battle Over: ${heroArcher.name} defeated ${evilArcher.name}`);
+    console.log(evilArcher.destroy());
+  }
+  if (heroArcher.healthPoints == 0) {
+    console.log(`Battle Over: ${evilArcher.name} defeated ${heroArcher.name}`);
+    console.log(heroArcher.destroy());
+  }
+}
