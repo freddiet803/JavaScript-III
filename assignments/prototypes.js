@@ -232,9 +232,13 @@ while (evilArcher.healthPoints > 0 && heroArcher.healthPoints > 0) {
   if (evilArcher.healthPoints == 0) {
     console.log(`Battle Over: ${heroArcher.name} defeated ${evilArcher.name}`);
     console.log(evilArcher.destroy());
+    console.log(heroArcher.greet());
   }
   if (heroArcher.healthPoints == 0) {
     console.log(`Battle Over: ${evilArcher.name} defeated ${heroArcher.name}`);
     console.log(heroArcher.destroy());
+    console.log(evilArcher.greet());
   }
 }
+
+console.log('===================================');
